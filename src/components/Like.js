@@ -6,26 +6,15 @@ export default class Like extends Component {
     constructor() {
         super();
 
-        this.state = {
-            count: 0
-        }
     }
 
-    increase = () => this.setState ({
-            count: this.state.count + 1
-        });
-
-    decrease = () => this.setState ({
-        count: this.state.count - 1
-    });
-
     render() {
-
+        const {photo, increase, decrease} = this.props;
         return (
             <div>
-                <Button bsSize = 'xsmall' onClick = { this.decrease } >-</Button>
-                <span> {this.state.count} </span>
-                <Button bsSize = 'xsmall' onClick = { this.increase } >+</Button>
+                <Button bsSize = 'xsmall' onClick = { increase(photo.id) } >-</Button>
+                <span> {photo.likes} </span>
+                <Button bsSize = 'xsmall' onClick = { decrease(photo.id) } >+</Button>
             </div>
         )
     }
