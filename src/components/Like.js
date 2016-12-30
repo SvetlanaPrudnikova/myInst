@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Button, FormControl} from 'react-bootstrap';
-import {connect} from 'react-redux';
+import {Button} from 'react-bootstrap';
 
 export default class Like extends Component {
 

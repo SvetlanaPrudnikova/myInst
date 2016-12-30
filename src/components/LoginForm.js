@@ -2,16 +2,17 @@ import React, {Component, PropTypes} from 'react';
 import {Button, FormControl} from 'react-bootstrap';
 import {loadAllPhotos} from '../AC/loadPhotos';
 import {connect} from 'react-redux';
+import { browserHistory } from 'react-router'
 import Loader from './Loader';
-import PhotosList from './PhotosList';
+
 
 class LoginForm extends Component {
     static propTypes = {
         loaded: PropTypes.bool,
         loading: PropTypes.bool,
-        photos: PropTypes.object,
-        loadAllPhotos: PropTypes.func
+        loadAllPhotos: PropTypes.func,
      };
+
 
     state = {
         login: '',
@@ -34,14 +35,15 @@ class LoginForm extends Component {
     };
 
     render() {
-        const { loaded, photos, loading} = this.props;
-        //const body = loaded ? <PhotosList photos = { photos }/>: null;
+        const { loaded, loading} = this.props;
+
         if (loading) return <Loader />
+        if (loaded) return browserHistory.push('/loginForm/photosList');
 
         return (
             <div>
                 <form onSubmit = {this.handleSubmit} className = 'loginForm'>
-                    <h3>Логин</h3>
+                    <h3>Логи</h3>
                     <FormControl
                         type='text'
                         value = { this.state.login }
@@ -65,6 +67,12 @@ class LoginForm extends Component {
     }
 }
 
-export default connect( null, { loadAllPhotos },  null, {pure: false} ) (LoginForm)
+export default connect( state => {
+    const { photos } = state;
+    return {
+        loading: photos.get('loading'),
+        loaded: photos.get('loaded')
+    }
+}, { loadAllPhotos },  null, {pure: false} ) (LoginForm)
 
 

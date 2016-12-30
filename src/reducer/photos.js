@@ -1,7 +1,6 @@
 import { LOAD_ALL_PHOTOS, START, SUCCESS, INCREASE, DECREASE } from '../constants';
 import { arrayToMap } from '../store/helpers';
 import { Record, Map } from 'immutable';
-import { browserHistory } from 'react-router'
 
 const PhotoModel = Record({
     id: "",
@@ -25,7 +24,6 @@ export default (photos = defaultState, action) => {
             return photos.set('loading', true);
 
         case LOAD_ALL_PHOTOS + SUCCESS:
-            browserHistory.replace('/loginForm/photosList');
             return photos
                 .set('entities', arrayToMap(response, photo => new PhotoModel(photo)))
                 .set('loading', false)

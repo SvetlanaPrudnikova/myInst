@@ -5,13 +5,9 @@ import {Col, Grid, Row} from 'react-bootstrap';
 import Like from './Like';
 import {increaseLikes, decreaseLikes} from '../AC/photos';
 
-
-//import { Link } from 'react-router';
-
-
 class PhotosList extends Component {
     static propTypes = {
-        photos: PropTypes.array
+        photos: PropTypes.object
     };
 
     increase = id => ev => {
@@ -27,7 +23,7 @@ class PhotosList extends Component {
     };
 
     render() {
-        const {photos, increaseLikes, decreaseLikes} = this.props;
+        const {photos} = this.props;
         const photosArr = photos.valueSeq().toArray();
         const photosComp = photosArr.map(photo => (
             <Col xs = {12} sm = {6} md = {4} key={photo.id}>
@@ -39,7 +35,7 @@ class PhotosList extends Component {
 
         return (
             <Grid>
-                <Row className="show-grid">
+                <Row className = 'show-grid'>
                     <ul className='photosContainer'>
                         {photosComp}
                     </ul>
