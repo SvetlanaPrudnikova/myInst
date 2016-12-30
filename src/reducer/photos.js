@@ -1,4 +1,4 @@
-import { LOAD_ALL_PHOTOS, START, SUCCESS } from '../constants';
+import { LOAD_ALL_PHOTOS, START, SUCCESS, INCREASE } from '../constants';
 import { arrayToMap } from '../store/helpers';
 import { Record, Map } from 'immutable';
 
@@ -29,7 +29,11 @@ export default (photos = defaultState, action) => {
                 .set('loaded', true)
     }
 
-    console.log(photos);
+    /*switch (type) {
+        case INCREASE:
+            return photos.updateIn(['entities', 'likes'], likes => likes + 1);
+    }*/
+
     return photos;
 }
 

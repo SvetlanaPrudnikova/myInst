@@ -75,6 +75,6 @@ export default connect(state => {
         loading: photos.get('loading'),
         loaded: photos.get('loaded')
     }
-}, { loadAllPhotos },  null, {pure: false} ) (LoginForm)
+}, { loadAllPhotos } ) (LoginForm)
 
 
