@@ -35,8 +35,7 @@ class LoginForm extends Component {
 
     render() {
         const { loaded, photos, loading} = this.props;
-        const body = loaded ? <PhotosList photos = { photos }/>: null;
-
+        //const body = loaded ? <PhotosList photos = { photos }/>: null;
         if (loading) return <Loader />
 
         return (
@@ -61,20 +60,11 @@ class LoginForm extends Component {
                     <Button onClick = { this.handleSubmit } bsStyle='primary' className='enterButton'> Войти </Button>
                 </form>
 
-                {body}
-
             </div>
         )
     }
 }
 
-export default connect(state => {
-    const {photos} = state;
-    return {
-        photos: photos.get('entities'),
-        loading: photos.get('loading'),
-        loaded: photos.get('loaded')
-    }
-}, { loadAllPhotos } ) (LoginForm)
+export default connect( null, { loadAllPhotos },  null, {pure: false} ) (LoginForm)
 
 

@@ -3,27 +3,24 @@ import Photo from './Photo';
 import {connect} from 'react-redux';
 import {Col, Grid, Row} from 'react-bootstrap';
 import Like from './Like';
-import { increase } from '../AC/likes';
-import { decrease } from '../AC/likes';
+
 
 //import { Link } from 'react-router';
 
 
 class PhotosList extends Component {
     static propTypes = {
-        photos: PropTypes.object.isRequired
+        photos: PropTypes.array
     };
 
-
     render() {
-        const { photos, decrease, increase } = this.props;
-        const photosArr = photos.valueSeq().toArray();
+        const {photos} = this.props;
 
-        const photosComp = photosArr.map(photo => (
+        const photosComp = photos.map(photo => (
             <Col xs = {12} sm = {6} md = {4} key={photo.id}>
                 <li>
                     <Photo photo = { photo }/>
-                    <Like photo = { photo } increase = { increase } decrease = {decrease}/>
+                    <Like photo = { photo } />
                 </li>
             </Col>))
 
@@ -39,5 +36,9 @@ class PhotosList extends Component {
     }
 }
 
-export default connect( null , {increase, decrease} )(PhotosList)
-
+export default connect(state => {
+    const {photos} = state;
+    return {
+        photos: photos.get('entities').valueSeq().toArray(),
+    }
+} )(PhotosList)

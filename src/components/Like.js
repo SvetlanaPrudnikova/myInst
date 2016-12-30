@@ -1,31 +1,36 @@
 import React, {Component} from 'react';
 import {Button, FormControl} from 'react-bootstrap';
+import {increaseLikes, decreaseLikes} from '../AC/photos';
+import {connect} from 'react-redux';
 
-export default class Like extends Component {
+class Like extends Component {
 
     constructor() {
         super();
-
     }
 
-    increaseLikes = (id) => {
-        const { increase } = this.props;
-        increase (id);
+    increase = id => ev => {
+        ev.preventDefault();
+        const { increaseLikes } = this.props;
+        increaseLikes(id)
     };
 
-    decreaseLikes = (id) => {
-        const { decrease } = this.props;
-        decrease (id);
+    decrease = id => ev => {
+        ev.preventDefault();
+        const { decreaseLikes } = this.props;
+        decreaseLikes(id)
     };
 
     render() {
         const {photo} = this.props;
         return (
             <div>
-                <Button bsSize = 'xsmall' onClick = { this.increaseLikes (photo.id) } >-</Button>
-                <span> {photo.likes} </span>
-                <Button bsSize = 'xsmall' onClick = { this.decreaseLikes(photo.id) } >+</Button>
+                <Button bsSize = 'xsmall' onClick = { this.decrease (photo.id) }>-</Button>
+                <span> {photo.likes} +1</span>
+                <Button bsSize = 'xsmall' onClick = { this.increase (photo.id) } >+</Button>
             </div>
         )
     }
 }
+
+export default connect(null, {increaseLikes, decreaseLikes} )(Like)
