@@ -2,11 +2,11 @@ import {START, SUCCESS, FAIL} from '../constants'
 
 export default store => next => action => {
     const {callAPI, type, ...rest} = action;
-    if (!callAPI) return next(action)
+    if (!callAPI) return next(action);
 
-    next({...rest, type: type + START})
+    next({...rest, type: type + START});
 
-    //For dev only, no need in prod
+    //задержку поставила, чтобы можно было увидеть лоадер
     setTimeout(() => {
 
         fetch(callAPI)

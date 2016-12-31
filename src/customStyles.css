@@ -71,3 +71,12 @@ html, body, #container {
     width: 100%;
 }
 
+.likeChange,
+.likeChange:active,
+.likeChange:focus,
+.likeChange:hover,
+.likeChange.likeChange:hover {
+    font-size: 110%;
+    text-decoration: none;
+    outline: none
+}

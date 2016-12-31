@@ -1,20 +1,22 @@
-import React, {Component} from 'react';
+import React, { PropTypes } from 'react';
 import {Button} from 'react-bootstrap';
 
-export default class Like extends Component {
+function Like(props) {
 
-    constructor() {
-        super();
-    }
-
-    render() {
-        const {photo, increase, decrease} = this.props;
-        return (
-            <div>
-                <Button bsSize = 'xsmall' onClick = { decrease (photo.id) }>-</Button>
-                <span> {photo.likes}</span>
-                <Button bsSize = 'xsmall' onClick = { increase (photo.id) } >+</Button>
-            </div>
-        )
-    }
+    const { photo, increase, decrease } = props;
+    return (
+        <div>
+            <Button bsSize = 'xsmall' bsStyle = 'link' className = 'likeChange' onClick = { decrease(photo.id) }> &ndash; </Button>
+            <span> { photo.likes }</span>
+            <Button bsSize='xsmall' bsStyle = 'link' className = 'likeChange' onClick = { increase(photo.id) }> &#43; </Button>
+        </div>
+    )
 }
+
+Like.propTypes = {
+    photo: PropTypes.object.isRequired,
+    increase: PropTypes.func,
+    decrease: PropTypes.func
+}
+
+export default Like;
